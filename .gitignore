@@ -1,0 +1,12 @@
+# Node
+node_modules/
+backend/node_modules/
+dist/
+backend/dist/
+
+# Environment
+.env
+backend/.env
+
+# Prisma generated
+backend/src/generated/prisma
