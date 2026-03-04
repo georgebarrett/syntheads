@@ -19,6 +19,12 @@ export const validateProductDescription = (description: string): void => {
   }
 }
 
+export const validateImageUrl = (imageUrl: string): void => {
+    if (!imageUrl.trim()) {
+        throw new InvalidProductError('Product image is required.')
+    }
+}
+
 export const validatePriceInMinorUnits = (priceInMinorUnits: number): void => {
     if (!Number.isInteger(priceInMinorUnits) || priceInMinorUnits < 0 ) {
         throw new InvalidProductError('Product Price must not be a negative number.')
@@ -35,6 +41,7 @@ export const createProduct = ({
     id,
     name,
     description,
+    imageUrl,
     priceInMinorUnits,
     currency,
     stockQuantity,
@@ -44,6 +51,7 @@ export const createProduct = ({
     id: string
     name: string
     description: string
+    imageUrl: string,
     priceInMinorUnits: number
     currency: 'GBP'
     stockQuantity: number
@@ -55,6 +63,7 @@ export const createProduct = ({
     validateProductDescription(description)
     validatePriceInMinorUnits(priceInMinorUnits)
     validateStockQuantity(stockQuantity)
+    validateImageUrl(imageUrl)
 
     const now = new Date()
 
@@ -62,6 +71,7 @@ export const createProduct = ({
         id,
         name: name.trim(),
         description: description.trim(),
+        imageUrl,
         priceInMinorUnits,
         currency,
         stockQuantity,
