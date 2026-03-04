@@ -1,3 +1,6 @@
+import { Role } from "./user.types.js"
+import type { User } from "./user.types.js"
+
 export class InvalidEmailError extends Error {
     constructor(message: string) {
         super(message)
@@ -41,3 +44,28 @@ export const validatePassword = (password: string): void => {
             throw new InvalidPasswordError('Password must contain at least one special character.')
         }
     }
+
+export const createUser = ({
+    id,
+    email,
+    passwordHash,
+    role = Role.CUSTOMER
+}: {
+    id: string
+    email: string
+    passwordHash: string
+    role?: Role
+}): User => {
+    const normalisedEmail = normaliseEmail(email)
+
+    const now = new Date()
+
+    return {
+        id,
+        email: normalisedEmail,
+        passwordHash,
+        role,
+        createdAt: now,
+        updatedAt: now
+    }
+}
