@@ -59,15 +59,15 @@ export const createProduct = ({
     const now = new Date()
 
     return {
-    id,
-    name: name.trim(),
-    description: description.trim(),
-    priceInMinorUnits,
-    currency,
-    stockQuantity,
-    categoryId,
-    isActive,
-    createdAt: now,
-    updatedAt: now
-  }
+        id,
+        name: name.trim(),
+        description: description.trim(),
+        priceInMinorUnits,
+        currency,
+        stockQuantity,
+        categoryId,
+        isActive,
+        createdAt: now,
+        updatedAt: now
+    }
 }
