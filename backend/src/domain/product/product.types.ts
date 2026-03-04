@@ -8,6 +8,7 @@ export interface Product {
     currency: Currency
     stockQuantity: number
     categoryId: string
+    imageUrl: string
     isActive: boolean
     createdAt: Date
     updatedAt: Date
