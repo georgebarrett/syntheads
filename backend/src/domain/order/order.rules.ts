@@ -1,4 +1,4 @@
-import type { OrderItem, OrderStatus, Order } from "./order.types.js";
+import type { OrderItem, Order } from "./order.types.js";
 
 export class InvalidOrderError extends Error {
     constructor(message: string) {
