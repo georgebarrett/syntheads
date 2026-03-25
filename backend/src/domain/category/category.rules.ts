@@ -9,7 +9,7 @@ export class InvalidCategoryError extends Error {
 
 export const validateCategoryName = (name: string): void => {
     if (!name.trim()) {
-        throw new InvalidCategoryError('A catgegory must have a name.')
+        throw new InvalidCategoryError('A categegory must have a name.')
     }
 }
 
