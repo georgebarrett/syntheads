@@ -1,4 +1,4 @@
-export type Currency = 'GBP'
+import type { Currency } from "../product/product.types.js"
 
 export type OrderStatus = 
     |   'pending'

@@ -1,4 +1,4 @@
-export type Currency = 'GBP'
+import type { Currency } from "../shared/currency.js"
 
 export interface Product {
     id: string
