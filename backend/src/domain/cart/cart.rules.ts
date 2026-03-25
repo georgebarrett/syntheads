@@ -40,7 +40,7 @@ export const addToCart = (
     validateQuantity(item.quantity)
 
     const existingItem = cart.items.find(
-        item => item.productId === item.productId
+        cartItem => cartItem.productId === item.productId
     )
 
     let items = [...cart.items]
