@@ -33,10 +33,10 @@ describe('cart domain rules', () => {
         expect(updatedCart.items.length).toBe(0)
     })
 
-    it('calculates the total price of the card', () => {
-        const cart = createCart({id: 'cart2', userId: 'user2'})
+    it('calculates the total price of the cart', () => {
+        let cart = createCart({id: 'cart2', userId: 'user2'})
 
-        addToCart(cart, {
+        cart = addToCart(cart, {
             productId: 'product1',
             quantity: 6,
             priceInMinorUnits: 1000
