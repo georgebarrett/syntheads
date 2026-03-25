@@ -9,7 +9,7 @@ export class InvalidCartError extends Error {
 
 export const validateQuantity = (quantity: number): void => {
     if (!Number.isInteger(quantity) || quantity < 1) {
-        throw new InvalidCartError('The cart must have at least one product inside.')
+        throw new InvalidCartError('The item quantity must be at least 1.')
     }
 }
 
@@ -39,32 +39,42 @@ export const addToCart = (
 
     validateQuantity(item.quantity)
 
-    const itemAlreadyInCart = cart.items.find(
-        i => i.productId === item.productId
+    const existingItem = cart.items.find(
+        item => item.productId === item.productId
     )
 
-    if (itemAlreadyInCart) {
-        itemAlreadyInCart.quantity += item.quantity
+    let items = [...cart.items]
+
+    if (existingItem) {
+        items = items.map(i => i.productId === item.productId
+            ? { ...i, quantity: i.quantity + item.quantity }
+            : i
+        )
     } else {
-        cart.items.push(item)
+        items.push(item)
     }
 
-    cart.updatedAt = new Date()
-
-    return cart
+    return {
+        ...cart,
+        items,
+        updatedAt: new Date()
+    }
 }
 
 export const removeFromCart = (
     cart: Cart,
     productId: string
 ): Cart => {
-    cart.items = cart.items.filter(
+
+    const items = cart.items.filter(
         item => item.productId !== productId
     )
 
-    cart.updatedAt = new Date()
-
-    return cart
+    return {
+        ...cart,
+        items,
+        updatedAt: new Date()
+    }
 }
 
 export const calculateCartTotal = (cart: Cart): number => {
