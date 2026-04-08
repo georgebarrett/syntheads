@@ -31,6 +31,7 @@ model User {
   updatedAt    DateTime @updatedAt
 
   reviews      Review[]
+  cart         Cart?
 }
 
 model Category {
@@ -73,4 +74,13 @@ model Review {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([productId, userId])
+}
+
+model Cart {
+  id        String   @id @default(uuid())
+  userId    String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
