@@ -29,6 +29,8 @@ model User {
   role         Role
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+
+  reviews      Review[]
 }
 
 model Category {
@@ -54,4 +56,21 @@ model Product {
   updatedAt         DateTime @updatedAt
 
   category          Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  reviews           Review[]
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  productId String
+  userId    String
+  rating    Int
+  comment   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, userId])
 }
