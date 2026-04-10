@@ -69,6 +69,7 @@ model Product {
 
   reviews           Review[]
   cartItems         CartItem[]
+  orderItems        OrderItem[]
 }
 
 model Review {
@@ -121,4 +122,20 @@ model Order {
   updatedAt         DateTime    @updatedAt
 
   user              User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items             OrderItem[]
+}
+
+model OrderItem {
+  id                String   @id @default(uuid())
+  orderId           String
+  productId         String
+  productName       String
+  productImageUrl   String
+  quantity          Int
+  priceInMinorUnits Int
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  order             Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product           Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
