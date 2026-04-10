@@ -40,6 +40,7 @@ model User {
 
   reviews      Review[]
   cart         Cart?
+  orders       Order[]
 }
 
 model Category {
@@ -108,4 +109,16 @@ model CartItem {
   product            Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@unique([cartId, productId])
+}
+
+model Order {
+  id                String      @id @default(uuid())
+  userId            String
+  totalInMinorUnits Int
+  currency          Currency
+  status            OrderStatus @default(PENDING)
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+
+  user              User        @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
